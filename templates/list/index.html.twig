@@ -1,0 +1,24 @@
+{# templates/list/index.html.twig #} {% extends 'base.html.twig' %} {% block stylesheets %}
+<link rel="stylesheet" href="asset/css/list.css" /> {% endblock %} {% block
+body %}
+<main class="main">
+  {% for listItem in listPosts %}
+  <div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+      <p>Автор: {{ listItem.getUser().getName() }} </p>
+      <p class="date">Дата добавления: {{ listItem.getCreatedAt()|format_datetime('short', 'short') }}</p>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ listItem.getTitle() }}</h5>
+      <p class="card-text">{{ listItem.getShortContent() }}</p>
+    </div>
+    <div class="card-footer" style="height: 57px;">
+      <a class="btn btn-sm align-middle btn-outline-secondary"
+        href="{{ path('post', {'slug' : listItem.getId()})}}">Открыть</a>
+      <p class="date">Кол-во комментариев: {{ listItem.getComments()|length }}</p>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="navigation">{{ knp_pagination_render(listPosts) }}</div>
+</main>
+{% endblock %}

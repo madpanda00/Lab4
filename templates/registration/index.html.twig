@@ -1,0 +1,32 @@
+{# templates/registration/index.html.twig #} {% extends 'base.html.twig' %} {% block stylesheets %}
+<link rel="stylesheet" href="asset/css/login.css" /> {% endblock %} {%
+block body %}
+<div class="container">
+  <div class="form-signin">
+    <h1><a href="{{ path('list') }}" style="text-decoration: none;">SpecT</a></h1>
+    {{ form_start(form, {'method': 'POST'}) }}
+    <div class="form-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping"><i class="bi bi-person"></i></span>
+      {{ form_row(form.name, {'attr': {'class': 'form-control', 'placeholder': "Username"}}) }}
+    </div>
+    <div class="form-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping"><i class="bi bi-envelope"></i></span>
+      {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': "Email"}}) }}
+    </div>
+    <div class="form-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key"></i></span>
+      {{ form_row(form.password.first, {'attr': {'class': 'form-control', 'placeholder': "Password"}}) }}
+    </div>
+    <div class="form-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key"></i></span>
+      {{ form_row(form.password.second, {'attr': {'class': 'form-control', 'placeholder': "Confirm password"}}) }}
+    </div>
+    <div class="form-group flex-nowrap">
+      {{ form_row(form.agreeTerms, {'attr': {'style': 'margin-left:13px'}, label: 'Я принимаю правила сайта'}) }}
+    </div>
+    <button class="btn btn-sm align-middle btn-outline-secondary" type="submit">Регистрация</button>
+    {{ form_end(form) }}
+    <p class="or">У вас уже есть аккаунт?<a href="{{ path('app_login') }}">Войти</a></p>
+  </div>
+</div>
+{% endblock %}

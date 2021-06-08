@@ -1,0 +1,44 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Spect{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/asset/css/header.css" />
+  {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #efefef;">
+    <a class="navbar-brand" href="{{ path('list') }}">SpecT</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+    <ul class="nav navbar-nav navbar-right">
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+      <li class="nav-item"><i class="bi bi-person-circle" style="margin-right: 5px;"></i>
+        <p class="username">{{ app.user.name }}</p>
+      </li>
+      {% if is_granted('ROLE_ADMIN') %}
+      <li class="nav-item"><a class="btn btn-sm align-middle btn-outline-secondary"
+          href="{{ path('admin') }}">Админка</a></li>
+      {% endif %}
+      <li class="nav-item"><a class="btn btn-sm align-middle btn-outline-secondary"
+          href="{{ path('createPost') }}">Создать статью</a></li>
+      <li class="nav-item"><a class="btn btn-sm align-middle btn-outline-secondary"
+          href="{{ path('app_logout') }}">Выйти</a></li>
+      {% else %}
+      <li class="nav-item"><a class="btn btn-sm align-middle btn-outline-secondary"
+          href="{{ path('app_login') }}">Войти</a></li>
+      <li class="nav-item">
+        <a class="btn btn-sm align-middle btn-outline-secondary" href="{{ path('registration') }}">Регистрация</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% block body %}{% endblock %} {% block javascripts %}{% endblock %}
+</body>
+
+</html>

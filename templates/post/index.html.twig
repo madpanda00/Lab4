@@ -1,0 +1,37 @@
+{# templates/post/index.html.twig #}{% extends 'base.html.twig' %} {% block stylesheets %}
+<link rel="stylesheet" href="/asset/css/post.css" /> {% endblock %}
+{% block body %}
+<main class="main">
+    <div class="form">
+        <div class="page">
+            <h1>{{ post.getTitle() }}</h1>
+            <div class="card-footer text-muted">
+                <p>Автор: {{ post.getUser().getName() }}</p>
+                <p>Дата публикации: {{ post.getCreatedAt()|format_datetime('short', 'short') }}</p>
+                <p>Кол-во просмотров: {{ post.getViews()}}</p>
+            </div>
+            <p>{{ post.getContent() }}</p>
+        </div>
+    </div>
+    <div class="form">
+        <div class="page comment">
+            <span>Комментарии</span>
+            <span class="text-muted" style="margin-left: 10px;">{{ post.getComments()|length }}</span>
+            {{ render(controller('App\\Controller\\CommentController::index', {'slug': post.getId() })) }}
+            {% for comment in listComments %}
+            <div class="card mb-3 color-ef">
+                <div class="card-body">
+                    <div class="card-footer color-ef">
+                        <p>Автор: {{ comment.getUser().getName() }}</p>
+                        <p>Дата: {{ comment.getCreateAt()|format_datetime('short', 'short') }}</p>
+                    </div>
+                    <div class="card card-comment">
+                        <div>{{ comment.getContent() }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

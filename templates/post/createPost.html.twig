@@ -1,0 +1,20 @@
+{# templates/post/createPost.html.twig #} {% extends 'base.html.twig' %} {% block stylesheets %}
+<link rel="stylesheet" href="/asset/css/postCreate.css" /> {% endblock %} {%
+block body %}
+
+<div class="main" enctype="multipart/form-data">
+    <h2>Добавьте свою статью прямо сейчас</h2>
+    {{ form_start(form) }}
+    <div class="form-floating mb-3">
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="form-floating mb-3">
+        {{ form_widget(form.short_content) }}
+    </div>
+    <div class="form-floating mb-3">
+        {{ form_widget(form.content) }}
+    </div>
+    <button class="btn btn-sm align-middle btn-outline-secondary" type="submit">Добавить</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
